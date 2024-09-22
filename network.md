@@ -57,3 +57,11 @@ arp
 mtr <domain|ip>
 
 ```
+
+## check if port is open and connect 
+
+```
+
+telnet  <ip > <port>
+
+```
