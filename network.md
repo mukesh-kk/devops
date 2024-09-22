@@ -34,3 +34,26 @@ dig <domain>
 nplookpup <domain>
 
 ```
+
+##  routes and gateways 
+
+```
+
+route -n
+route
+
+```
+## see amc address of each interface
+
+```
+
+arp
+
+```
+
+## trace a request 
+
+```
+mtr <domain|ip>
+
+```
