@@ -22,3 +22,23 @@ vagrant halt
 vagrant status
 
 ```
+
+# see all boxes  
+
+```
+vagrant box list
+
+```
+
+## Relaod
+```
+vagrant reload 
+
+```
+## destroy machine
+
+```
+vagrant destroy 
+
+```
+
