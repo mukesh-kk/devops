@@ -2,6 +2,7 @@
 
 ```
 netstat -antp
+ss -tunlp
 
 ```
 ## see ip add 
