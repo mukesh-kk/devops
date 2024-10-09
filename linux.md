@@ -7,3 +7,4 @@
 - Debian Based : Ubuntu , Kali 
 
     installation : <code> dpkg -i <-packege name-> </code>
+
