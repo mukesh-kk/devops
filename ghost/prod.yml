@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+
+  ghost:
+    image: ghost:5-alpine
+    restart: always
+    ports:
+      - 2368:2368
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: example
+      database__connection__database: ghost
+      mail__transport: SMTP
+      mail__options__host: email-smtp.ap-south-1.amazonaws.com
+      mail__options__port: 465
+      mail__options__auth__user: AKIA6BNM5UPAVLNAYQWH
+      mail__options__auth__pass: BHAQpfJIRZjX4yApI+olxw+pYvgYwO794OAnA9OwXs2b
+      mail__options__secure: true
+      mail__from: 'donotreply@hav-g.in'
+      # <domain>/blogs
+      url: http://192.168.56.82:2368/blogs
+    volumes:
+      - ghost:/var/lib/ghost/content
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  ghost:
+  db:
