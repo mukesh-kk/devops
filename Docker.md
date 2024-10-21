@@ -1,4 +1,4 @@
-# install docker 
+# install docker  on ubuntu
 ```
 sudo apt-get update
   sudo apt-get install \
@@ -27,7 +27,15 @@ sudo curl -L "https://github.com/docker/compose/releases/download/v2.22.0/docker
 sudo chmod +x /usr/local/bin/docker-compose
 
 ```
-# Commands
+# On fedora (or AM)
 
-``
+```
+sudo dnf update -y
+sudo dnf install -y docker
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+
 ```
