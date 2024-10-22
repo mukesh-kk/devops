@@ -25,6 +25,9 @@ ping <ip>
 ```
 nmap <ip>
 
+
+ufw status verbose
+
 ```
 
 ## dns lookup
