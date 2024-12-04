@@ -2,10 +2,17 @@
 ```
 sudo yum install certbot-nginx certbot
 
+or
+
+sudo apt update
+sudo apt install certbot python3-certbot-nginx -y
+
+
 ```
 # For Nginx
 ```
 sudo certbot --nginx
+or sudo certbot --nginx -d crm.bliall.in -d api.bliall.in
 
 sudo crontab -e
 
