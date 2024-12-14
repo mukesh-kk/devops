@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/bash 
 
 # Variables
 PG_VERSION="15"  # Change this to your desired PostgreSQL version
-PG_USER="db"
-PG_PASSWORD="mypassword"
-PG_DATABASE="mydb"
+PG_USER="bl_pg_db_su"
+PG_PASSWORD="8&^&ods8dk09&rd"
+PG_DATABASE="bs_db"
 
 # Update system packages
 echo "Updating system packages..."
