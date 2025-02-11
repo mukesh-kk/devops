@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+
+    environment {
+        TARGET_SERVER = "18.212.69.80"
+        TARGET_USER = "root"
+        TARGET_PATH = "/var/backend"
+    }
+
+    stages {
+        stage('Checkout Repository') {
+            steps {
+                script {
+                    checkout scm  
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh '''npm install'''
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Deploy to Server') {
+            steps {
+                sh '''
+                pwd \
+
+                whoami\
+
+                rsync -az --delete  -e "ssh -i /var/lib/jenkins/y -o StrictHostKeyChecking=no"   ./dist $TARGET_USER@$TARGET_SERVER:$TARGET_PATH
+                '''
+            }
+        }
+
+        stage('Restart PM2') {
+            steps {
+                // SSH into the server
+                sh '''
+                ssh -i /var/lib/jenkins/y -o StrictHostKeyChecking=no $TARGET_USER@$TARGET_SERVER "pm2 restart 0"
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Deployment successful!"
+            echo "$BUILD_ID $BUILD_TAG $Password"
+        }
+        failure {
+            echo "Deployment failed."
+        }
+    }
+}

@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = "us-east-1"
+        ECR_REPO = "nodejs-backend-build"
+        IMAGE_TAG = "latest1"
+        ECS_CLUSTER = "nodejs-cluster"
+        ECS_SERVICE = "nodejs-service"
+        AWS_ACCOUNT_ID = "9817465"
+    }
+
+    stages {
+        stage('Login to AWS ECR') {
+            steps {
+                sh '''
+                aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+                '''
+            }
+        }
+
+        stage('Build and Tag Docker Image') {
+            steps {
+                sh '''
+                docker build -t $ECR_REPO:$IMAGE_TAG .
+                docker tag $ECR_REPO:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$IMAGE_TAG
+                '''
+            }
+        }
+
+        stage('Push Image to ECR') {
+            steps {
+                sh '''
+                docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:$IMAGE_TAG
+                '''
+            }
+        }
+
+        stage('Update ECS Service') {
+            steps {
+                sh '''
+                aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment --region $AWS_REGION
+                '''
+            }
+        }
+    }
+}

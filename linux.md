@@ -39,4 +39,22 @@ apply
 
 systemctl restart ssh 
 
+
+```
+# See Users
+```
+cat /etc/passwd | cut -d: -f1
+
+```
+
+# KEEP RUNNING AFTER LOG OUT (DETACHED MODES)
+
+```
+- screen -S myapp
+
+- node app.js
+
+-detach : CTRL+A then D
+-reconnect : screen -r myapp
+
 ```
