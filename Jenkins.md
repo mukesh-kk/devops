@@ -55,3 +55,7 @@ sudo apt-get install jenkins -y
 [Video link](https://www.youtube.com/watch?v=HSA_mZoADSw)
 
 
+
+
+# SLACK INTERGRATIONS:
+[LINK](https://my.slack.com/services/new/jenkins-ci)
